@@ -1,0 +1,53 @@
+import { AppError, ResponseUtils } from "core/helpers";
+import { {{pascalCase name}} } from "app/database";
+
+export class {{pascalCase name}}Service {
+  static async List(currentPage: number = 1) {
+    const perPage = 10;
+    const page = currentPage ? currentPage : 1;
+    const skip = (page - 1) * perPage;
+
+    const totalData = await {{pascalCase name}}.count();
+    const data = await {{pascalCase name}}.findMany({ take: perPage, skip });
+
+    const response = ResponseUtils.paginate({
+      data,
+      totalData,
+      page,
+      perPage,
+    });
+
+    return response;
+  }
+
+  static async Show(id: string) {
+    const data = await {{pascalCase name}}.findFirstOrThrow({ where: { id } });
+
+    return data;
+  }
+
+  static async Create(payload: any) {
+    const data = await {{pascalCase name}}.create({ data: payload });
+
+    if (!data) throw AppError.E_GENERIC_ERROR("Error when create a data");
+
+    return data;
+  }
+
+  static async Update(id: string, name: string, email: string) {
+    await {{pascalCase name}}.findFirstOrThrow({ where: { id } });
+
+    const data = await {{pascalCase name}}.update({
+      where: { id },
+      data: { name, email },
+    });
+
+    return data;
+  }
+
+  static async Delete(id: string) {
+    const data = await {{pascalCase name}}.delete({ where: { id } });
+
+    return data;
+  }
+}
