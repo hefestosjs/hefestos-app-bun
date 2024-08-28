@@ -1,10 +1,10 @@
 {
-  "name": "hefestos-app",
+  "name": "hefestos-app-bun",
   "version": "1.0.0",
-  "description": "Hefestos application template",
+  "description": "Hefestos application template for Bun",
   "author": "lucasnjsilva",
   "license": "ISC",
-  "keywords": ["hefestosjs", "hefestos", "mvc"],
+  "keywords": ["hefestosjs", "hefestos", "mvc", "bun framework"],
   "main": "start/server.js",
   "scripts": {
     "start": "bun start/run.js start",
