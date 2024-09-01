@@ -1,14 +1,21 @@
-const { execSync } = require("node:child_process");
+const { execSync, exec } = require("node:child_process");
 const path = require("node:path");
 const Bun = require("bun");
 
 const npmBinPath = path.join(__dirname, "node_modules", ".bin");
 
 const execCommand = (command) => {
-  execSync(command, {
-    stdio: "inherit",
-    env: { ...process.env, PATH: `${npmBinPath}:${process.env.PATH}` },
-  });
+  try {
+    execSync(command, {
+      stdio: "inherit",
+      env: { ...process.env, PATH: `${npmBinPath}:${process.env.PATH}` },
+    });
+  } catch (error) {
+    console.log("\n");
+    console.log("Process Interrupted");
+
+    process.exit(0);
+  }
 };
 
 const commands = {
