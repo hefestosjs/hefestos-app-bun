@@ -10,7 +10,7 @@ export default function Assets(APP: Express) {
   APP.use("/images", express.static(join(ROOT_PATH, "public/images")));
   APP.use("/assets", express.static(join(ROOT_PATH, "public/assets")));
 
-  if (process.env.DRIVE === "local") {
+  if (process.env.DRIVE_DISK === "local") {
     APP.use("/files", express.static(join(ROOT_PATH, "uploads")));
   }
 }
